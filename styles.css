@@ -7,14 +7,15 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
 /* Base typography */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
-               "Helvetica Neue", Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
   line-height: 1.5;
   background-color: #f9f9f9;
   color: #333;
@@ -28,16 +29,35 @@ body {
   padding: 1rem;
 }
 
-/* Example component */
-button {
-  padding: 0.5rem 1rem;
-  border: none;
-  background: #007acc;
-  color: white;
-  cursor: pointer;
-  border-radius: 4px;
+/* Center header and footer sections */
+header,
+footer {
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-button:hover {
-  background: #005fa3;
+/* Grid for book cards */
+.book-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Individual book card */
+.book-card {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.book-card h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.book-card p {
+  margin-bottom: 0.25rem;
 }
