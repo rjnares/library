@@ -39,24 +39,33 @@ function createBookCard(book) {
 
   const titleEl = document.createElement('h2');
   titleEl.textContent = book.title;
+  titleEl.setAttribute('title', `Title: ${titleEl.textContent}`);
 
   const authorEl = document.createElement('p');
   authorEl.textContent = `Author: ${book.author}`;
+  authorEl.setAttribute('title', authorEl.textContent);
 
   const pagesEl = document.createElement('p');
   pagesEl.textContent = `Pages: ${book.pages}`;
+  pagesEl.setAttribute('title', pagesEl.textContent);
 
   const readEl = document.createElement('p');
   readEl.textContent = `Status: ${book.read ? 'Read' : 'Unread'}`;
+  readEl.setAttribute('title', readEl.textContent);
+
+  const bookInfoGroup = document.createElement('div');
+  bookInfoGroup.classList.add('book-info-group');
+  bookInfoGroup.append(titleEl, authorEl, pagesEl, readEl);
 
   const readToggleBtn = document.createElement('button');
-  readToggleBtn.textContent = book.read ? 'Mark as Unread' : 'Mark as Read';
+  readToggleBtn.textContent = book.read ? 'Mark Unread' : 'Mark Read';
   readToggleBtn.classList.add('btn');
   readToggleBtn.classList.add('primary');
   readToggleBtn.addEventListener('click', () => {
     book.toggleRead();
     readEl.textContent = `Status: ${book.read ? 'Read' : 'Unread'}`;
-    readToggleBtn.textContent = book.read ? 'Mark as Unread' : 'Mark as Read';
+    readEl.setAttribute('title', readEl.textContent);
+    readToggleBtn.textContent = book.read ? 'Mark Unread' : 'Mark Read';
   });
 
   const removeBtn = document.createElement('button');
@@ -72,7 +81,7 @@ function createBookCard(book) {
   buttonGroup.classList.add('button-group');
   buttonGroup.append(readToggleBtn, removeBtn);
 
-  card.append(titleEl, authorEl, pagesEl, readEl, buttonGroup);
+  card.append(bookInfoGroup, buttonGroup);
   return card;
 }
 
@@ -103,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Show form
   newBookBtn.addEventListener('click', () => {
     modal.classList.add('show');
+    document.getElementById('title').focus();
   });
 
   // Hide & reset form
@@ -130,7 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
   addBookToLibrary('The Hunger Games', 'Suzanne Collins', 374, true);
   addBookToLibrary('1984', 'George Orwell', 328, true);
   addBookToLibrary('Dune', 'Frank Herbert', 412, false);
-  addBookToLibrary('Foundation', 'Isaac Asimov', 255, false);
 
   // Initial render of pre-populated books
   renderLibrary();
