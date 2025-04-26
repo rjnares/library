@@ -20,6 +20,13 @@ function addBookToLibrary(title, author, pages, read) {
   return newBook;
 }
 
+function removeBookFromLibrary(id) {
+  const index = myLibrary.findIndex(book => book.id === id);
+  if (index > -1) {
+    myLibrary.splice(index, 1);
+  }
+}
+
 // Create a DOM element for a book card
 function createBookCard(book) {
   const card = document.createElement('div');
@@ -37,7 +44,15 @@ function createBookCard(book) {
   const readEl = document.createElement('p');
   readEl.textContent = `Status: ${book.read ? 'Read' : 'Not read yet'}`;
 
-  card.append(titleEl, authorEl, pagesEl, readEl);
+  const deleteBtn = document.createElement('button');
+  deleteBtn.textContent = 'Delete';
+  deleteBtn.classList.add('delete-btn');
+  deleteBtn.addEventListener('click', () => {
+    removeBookFromLibrary(book.id);
+    card.remove();
+  });
+
+  card.append(titleEl, authorEl, pagesEl, readEl, deleteBtn);
   return card;
 }
 
