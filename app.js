@@ -13,6 +13,11 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
+// Prototype method to toggle read status
+Book.prototype.toggleRead = function () {
+  this.read = !this.read;
+};
+
 // Add a Book to the library array, returns the new book
 function addBookToLibrary(title, author, pages, read) {
   const newBook = new Book(title, author, pages, read);
@@ -42,17 +47,32 @@ function createBookCard(book) {
   pagesEl.textContent = `Pages: ${book.pages}`;
 
   const readEl = document.createElement('p');
-  readEl.textContent = `Status: ${book.read ? 'Read' : 'Not read yet'}`;
+  readEl.textContent = `Status: ${book.read ? 'Read' : 'Unread'}`;
 
-  const deleteBtn = document.createElement('button');
-  deleteBtn.textContent = 'Delete';
-  deleteBtn.classList.add('delete-btn');
-  deleteBtn.addEventListener('click', () => {
+  const readToggleBtn = document.createElement('button');
+  readToggleBtn.textContent = book.read ? 'Mark as Unread' : 'Mark as Read';
+  readToggleBtn.classList.add('btn');
+  readToggleBtn.classList.add('primary');
+  readToggleBtn.addEventListener('click', () => {
+    book.toggleRead();
+    readEl.textContent = `Status: ${book.read ? 'Read' : 'Unread'}`;
+    readToggleBtn.textContent = book.read ? 'Mark as Unread' : 'Mark as Read';
+  });
+
+  const removeBtn = document.createElement('button');
+  removeBtn.textContent = 'Remove';
+  removeBtn.classList.add('btn');
+  removeBtn.classList.add('secondary');
+  removeBtn.addEventListener('click', () => {
     removeBookFromLibrary(book.id);
     card.remove();
   });
 
-  card.append(titleEl, authorEl, pagesEl, readEl, deleteBtn);
+  const buttonGroup = document.createElement('div');
+  buttonGroup.classList.add('button-group');
+  buttonGroup.append(readToggleBtn, removeBtn);
+
+  card.append(titleEl, authorEl, pagesEl, readEl, buttonGroup);
   return card;
 }
 
