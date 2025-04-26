@@ -12,12 +12,39 @@
     <h1>Odin Library</h1>
   </header>
   <main class="container">
+    <button id="new-book-btn" class="btn">+ New Book</button>
     <section id="book-list" class="book-list"></section>
+    <div id="book-form-modal" class="modal">
+      <div class="modal-content">
+        <h2>Add a New Book</h2>
+        <form id="book-form">
+          <label>
+            Title
+            <input type="text" id="title" name="title" required />
+          </label>
+          <label>
+            Author
+            <input type="text" id="author" name="author" required />
+          </label>
+          <label>
+            Pages
+            <input type="number" id="pages" name="pages" min="1" required />
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="read" name="read" />
+            Read
+          </label>
+          <div class="form-buttons">
+            <button type="submit" class="btn">Add Book</button>
+            <button type="button" id="cancel-btn" class="btn alt">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </main>
   <footer>
     <p>© 2025 Roberto Nares</p>
   </footer>
   <script src="app.js"></script>
 </body>
-
 </html>
